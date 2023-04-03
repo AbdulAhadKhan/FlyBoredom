@@ -26,11 +26,12 @@ def signup(request):
             myuser.save()
 
             # Add a success message and redirect to the signin page
-            messages.success(request, "Your account is successfully created.")
+            messages.success(request, "Your account is successfully created. Login to continue")
             return redirect('signin')
 
         except IntegrityError:
-            return redirect('signin')
+            messages.error(request, "Username already exists. Please try another username.")
+            return redirect('signup')
 
     # Render the signup.html template
     return render(request, "authentication/signup.html")
