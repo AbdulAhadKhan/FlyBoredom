@@ -93,9 +93,9 @@ def checkout(request):
                         messages.error(request, f"{email} is not a valid email address. Try again")
                         return redirect('cart:view_cart')
                 participantDict[item.id] = participants
-                cart.book(participantDict)
-                messages.success(request, "Booking successful! Thank you.")
-                return redirect('cart:view_cart')
+            cart.book(participantDict)
+            messages.success(request, "Booking successful! Thank you.")
+            return redirect('cart:view_cart')
             
         context = {'total_cost': cart.calculate_total_cost(), 'cart_items': cart.cartitem_set.all(), 'conversion_rates': conversion_rates}
         return render(request, 'cart/checkout.html', context)
